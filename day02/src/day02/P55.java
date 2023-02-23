@@ -5,9 +5,12 @@ public class P55 {
 	public static void main(String[] args) {
 		int a = 2000000000;
 		int b = 2000000000;
-		long c = a;
-		long d = b;
-		System.out.print(c+d);
+//		long c = a;
+//		long d = b;
+//		System.out.print(c+d);
+		
+		System.out.println((long)a+(long)b);
+		
 	}
 
 }
