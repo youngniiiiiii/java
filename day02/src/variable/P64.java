@@ -4,6 +4,7 @@ public class P64 {
 
 	public static void main(String[] args) {
 		int a = 10;
+		int b = 10;
 		double d =10.235;
 		String str1 = "abc";
 		String str2 = "abc";
