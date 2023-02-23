@@ -2,11 +2,12 @@ package variable;
 
 import java.util.Random;
 
-public class P68 {
+public class P68 plus {
 
 	public static void main(String[] args) {
 		int bb = 100;
 		String s1 = "10";
+		String s2 = "20";
 		int s2 = Integer.parseInt(s1); // 이런것이 API임
 		System.out.println(s1 + 10); // 1010이 나옴. String과 일반타입을 여산하면 강제로 String으로 바뀜
 		int a = 10;
