@@ -5,6 +5,7 @@ import java.util.Random;
 public class P68 {
 
 	public static void main(String[] args) {
+		int aa= 10;
 		int bb = 100;
 		String s1 = "10";
 		int s2 = Integer.parseInt(s1); // 이런것이 API임
