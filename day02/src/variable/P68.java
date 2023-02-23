@@ -2,7 +2,7 @@ package variable;
 
 import java.util.Random;
 
-public class P68 plus {
+public class P68{
 
 	public static void main(String[] args) {
 		int aa= 10;
