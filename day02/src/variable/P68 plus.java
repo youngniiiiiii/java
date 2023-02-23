@@ -5,6 +5,7 @@ import java.util.Random;
 public class P68 plus {
 
 	public static void main(String[] args) {
+		int aa= 10;
 		int bb = 100;
 		String s1 = "10";
 		String s2 = "20";
