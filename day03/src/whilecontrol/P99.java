@@ -4,6 +4,7 @@ public class P99 {
 
 	public static void main(String[] args) {
 		
+		int bb =100;
 			for(int i=2;i<10;i++) {
 				System.out.printf("%d 단 \n",i);
 				
