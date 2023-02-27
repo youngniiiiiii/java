@@ -6,6 +6,9 @@ public class P99 {
 		int a = 10;
 		int bb =1090;
 		int ab =100;
+		
+		int d =1 ;
+		int c =1000;
 			for(int i=2;i<10;i++) {
 				System.out.printf("%d 단 \n",i);
 				
