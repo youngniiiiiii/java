@@ -26,7 +26,7 @@ public class App {
 			System.out.println("---------------------------------------------------");
 		
 	//4. VIP들의 잔액의 합과 평균을 출력 하시오
-			if(acc.getGrade() == "VIP") {
+			if(acc.getGrade().equals("VIP")) {
 				sum += acc.getBalance();
 				cnt++;
 			}
