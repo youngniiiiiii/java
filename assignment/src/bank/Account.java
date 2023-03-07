@@ -17,7 +17,7 @@ public class Account {
 		this.balance = balance;
 
 		if (this.balance < 0) {
-			throw new Exception("잔액은 음수가 될 수 없습니다.");
+			throw new Exception();
 		}
 	}
 
