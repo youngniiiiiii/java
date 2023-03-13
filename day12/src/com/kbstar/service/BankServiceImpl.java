@@ -25,14 +25,14 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 	
 	DAO<String,UserDTO> userDao;
 	DAO<String,AccountDTO> accountDao;
-	DAO<String,TransactionDTO> transDao;
+	DAO<String,TransactionDTO> transactionDao;
 	
 	Notification notification ;
 	
 	public BankServiceImpl() {
 		userDao = new UserDAO();
 		accountDao = new AccountDAO();
-		transDao = new TransactionDAO(); //기능정의?
+		transactionDao = new TransactionDAO(); //기능정의?
 		notification = new NotificationImpl();
 	}
 	
@@ -83,14 +83,15 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 
 	@Override
 	public List<AccountDTO> getAllAccount(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<AccountDTO> list = null;
+		list = accountDao.search(k);
+		return list;
 	}
 
 	@Override
 	public List<TransactionDTO> getAllTr(String acc) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return transactionDao.search(acc);
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class BankServiceImpl implements BankService<UserDTO, AccountDTO, Transac
 		//거래내역 추가
 
 		TransactionDTO trans = new TransactionDTO(MakeAccountNumber.makeTrNum(), sendAcc, abalance, "O", desc);
-		transDao.insert(trans);
+		transactionDao.insert(trans);
 		System.out.println("거래가 완료되었습니다.");
 		
 		//SMS,email전송

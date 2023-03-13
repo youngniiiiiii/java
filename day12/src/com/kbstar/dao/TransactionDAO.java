@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kbstar.dto.AccountDTO;
 import com.kbstar.dto.TransactionDTO;
 import com.kbstar.frame.DAO;
 
@@ -35,10 +36,10 @@ public class TransactionDAO implements DAO<String, TransactionDTO>{
 
 	@Override
 	public TransactionDTO select(String k) throws Exception {
-		TransactionDTO trans = null;
+		TransactionDTO obj = null;
 
-		trans = db.get(k);
-		return trans;
+		obj = db.get(k);
+		return obj;
 		
 	}
 
@@ -46,8 +47,8 @@ public class TransactionDAO implements DAO<String, TransactionDTO>{
 	public List<TransactionDTO> select() throws Exception {
 		List<TransactionDTO> list = new ArrayList<TransactionDTO>();
 		Collection<TransactionDTO> col = db.values();
-		for(TransactionDTO trans: col) {
-			list.add(trans);
+		for(TransactionDTO obj: col) {
+			list.add(obj);
 		}
 		return list;
 	}
@@ -55,8 +56,16 @@ public class TransactionDAO implements DAO<String, TransactionDTO>{
 	//해당계좌의 거래내역을 조회 한다.
 	@Override
 	public List<TransactionDTO> search(Object obj) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<TransactionDTO> list = new ArrayList<TransactionDTO>();
+		Collection<TransactionDTO> col = db.values();//hashmap에서 데이터 뽑아내는 방법
+		
+		for(TransactionDTO tr: col) {	//끄집어낸 col을 list에 하나하나 담는다.
+			//계좌 중에서 id가 obj와 같은 것들만
+			if(tr.getAccNo().equals(obj)) {
+				list.add(tr);
+			}
+		}
+		return list;
 	}
 
 }

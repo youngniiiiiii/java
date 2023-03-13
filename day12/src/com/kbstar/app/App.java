@@ -1,19 +1,17 @@
 package com.kbstar.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.kbstar.dto.AccountDTO;
 import com.kbstar.dto.TransactionDTO;
 import com.kbstar.dto.UserDTO;
 import com.kbstar.frame.BankService;
-import com.kbstar.frame.CRUDService;
 import com.kbstar.service.BankServiceImpl;
-import com.kbstar.service.UserService;
 
 public class App {
 	public static void main(String[] args) {
 		BankService<UserDTO, AccountDTO, TransactionDTO, String, String> service = new BankServiceImpl();
-		CRUDService<String, UserDTO> userService = new UserService();
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			UserDTO user = null;
@@ -31,7 +29,7 @@ public class App {
 				user = new UserDTO(id, pwd, name, email, contact);
 				try {
 					service.register(user);
-					System.out.println("가입을 축하합니다!!! 환영합니다 호갱님!!");
+					System.out.println("가입을 축하합니다!!! 환영합니다!!");
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
@@ -57,8 +55,19 @@ public class App {
 							System.out.println("계좌개설 완료!!");
 						} else if (cmn.equals("t")) {
 							System.out.println("Transaction..");
+							String sendAcc = sc.next();
+							String receiveAcc = sc.next();
+							double balance = Double.parseDouble(sc.next());
+							String desc = sc.next();
+							service.transaction(sendAcc, receiveAcc, balance, desc);
+							System.out.println("Transaction Complete..");
 						} else if (cmn.equals("a")) {
 							System.out.println("Select Account..");
+							List<AccountDTO> list = null;
+							list = service.getAllAccount(user.getId());
+							for(AccountDTO acc:list) {
+								System.out.println(acc);
+							}
 						} else if (cmn.equals("i")) {
 							System.out.println("User Info..");
 							String rid = user.getId();
@@ -68,12 +77,13 @@ public class App {
 							
 						} else if (cmn.equals("tr")) {
 							System.out.println("Select Transaction..");
-							String sendAcc = sc.next();
-							String receiveAcc = sc.next();
-							double balance = Double.parseDouble(sc.next());
-							String desc = sc.next();
-							service.transaction(sendAcc, receiveAcc, balance, desc);
-							System.out.println("Transaction Complete..");
+							String accNo = sc.next();
+							List<TransactionDTO> list = null;
+							list = service.getAllTr(accNo);
+							for(TransactionDTO tr:list) {
+								System.out.println(tr);
+							}
+							
 						}
 					}
 				} catch (Exception e) {

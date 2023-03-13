@@ -57,7 +57,15 @@ public class AccountDAO implements DAO<String, AccountDTO> {
 		//Object obj = new String(); 자바의 모든 기능은 Object에서 상속받음
 		@Override
 		public List<AccountDTO> search(Object obj) throws Exception {
-			// TODO Auto-generated method stub
-			return null;
+			List<AccountDTO> list = new ArrayList<AccountDTO>();
+			Collection<AccountDTO> col = db.values();//hashmap에서 데이터 뽑아내는 방법
+			
+			for(AccountDTO acc: col) {	//끄집어낸 col을 list에 하나하나 담는다.
+				//계좌 중에서 id가 obj와 같은 것들만
+				if((acc.getHolder()).equals(obj)) {
+				list.add(acc);
+			}
+			}
+			return list;
 		}
 }
