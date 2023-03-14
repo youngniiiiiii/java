@@ -109,11 +109,11 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 			
 			try(ResultSet rset = pstmt.executeQuery()) {
 				rset.next();
-				String id = rset.getString("id");
-				String pwd = rset.getString("pwd");
+				String db_id = rset.getString("id");
+				String db_pwd = rset.getString("pwd");
 				String name = rset.getString("name");
 				int age = rset.getInt("age");
-				cust = new Cust(id, pwd, name, age);
+				cust = new Cust(db_id, db_pwd, name, age);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

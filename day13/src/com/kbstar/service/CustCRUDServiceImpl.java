@@ -1,6 +1,5 @@
 package com.kbstar.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLRecoverableException;
 import java.util.List;
 
@@ -22,15 +21,7 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust>{
 	public void register(Cust v) throws Exception {
 		// 데이터 검증
 		// DB 입력
-		try {
-			dao.insert(v);
-		}catch(Exception e) {
-			if(e instanceof SQLIntegrityConstraintViolationException) {//객체비교는 instanceof를 쓴다.
-				throw new Exception("ID가 중복 되었습니다.");
-			}else {
-				throw new Exception("시스템 장애 입니다.");
-			}
-		}
+	
 
 		// Email, SMS 전송
 		

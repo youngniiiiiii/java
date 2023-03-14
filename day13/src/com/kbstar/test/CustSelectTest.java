@@ -11,7 +11,7 @@ public class CustSelectTest {
 		Cust cust = null;
 		
 		try {
-			cust = crudService.get("id00");
+			cust = crudService.get("id75");
 			System.out.println(cust);
 			
 		}catch (Exception e) {
