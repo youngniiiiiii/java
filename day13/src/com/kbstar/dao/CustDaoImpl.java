@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,7 +14,7 @@ import com.kbstar.dto.Cust;
 import com.kbstar.frame.DAO;
 import com.kbstar.frame.Sql;
 
-//dto임
+														//dto임
 public class CustDaoImpl implements DAO<String, String, Cust> {
 
 	public CustDaoImpl() {
@@ -44,7 +45,8 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 
 	@Override
 	public void insert(Cust v) throws Exception {
-		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.insertSql);) {
+		try (Connection con = getConnection(); 
+			PreparedStatement pstmt = con.prepareStatement(Sql.insertSql);) {
 			pstmt.setString(1, v.getId());
 			pstmt.setString(2, v.getPwd());
 			pstmt.setString(3, v.getName());
@@ -102,31 +104,48 @@ public class CustDaoImpl implements DAO<String, String, Cust> {
 	public Cust select(String k) throws Exception {
 		Cust cust = null;
 		try(Connection con = getConnection();
-				PreparedStatement pstmt = con.prepareStatement(Sql.selectSql);) {
-			pstmt.setString(1, k);
-			try(ResultSet rset = pstmt.executeQuery()){
+				PreparedStatement pstmt = con.prepareStatement(Sql.selectSql)) {
+			pstmt.setString(1, k);//첫번째 값에 k값을 세팅하겠다.
+			
+			try(ResultSet rset = pstmt.executeQuery()) {
 				rset.next();
-				String db_id = rset.getString("id");
-				String db_pwd = rset.getString("pwd");
+				String id = rset.getString("id");
+				String pwd = rset.getString("pwd");
 				String name = rset.getString("name");
 				int age = rset.getInt("age");
-				cust = new Cust(db_id, db_pwd, name, age);
-				System.out.println(db_id+" "+name+" "+age);
-				
-			}catch(SQLException e) {
+				cust = new Cust(id, pwd, name, age);
+			}catch(Exception e) {
 				e.printStackTrace();
 			}
-	
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} 
-			return cust;
+			
+		}catch(Exception e){
+			throw e;
+		}
+		return cust;
 	}
 
 	@Override
 	public List<Cust> selectAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cust> list = new ArrayList<>();
+		try(Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(Sql.selectAllSql)) {
+			try(ResultSet rset = pstmt.executeQuery();) {
+				while(rset.next()) {
+					Cust cust = null;
+					String id = rset.getString("id");
+					String pwd = rset.getString("pwd");
+					String name = rset.getString("name");
+					int age = rset.getInt("age");
+					cust = new Cust(id, pwd, name, age);
+					list.add(cust);
+				};
+			}catch(Exception e) {
+				
+			}
+		}catch(Exception e){
+			throw e;
+		}
+		return list;
 	}
 
 	@Override

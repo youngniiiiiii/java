@@ -65,15 +65,30 @@ public class CustCRUDServiceImpl implements CRUDService<String, Cust>{
 
 	@Override
 	public Cust get(String k) throws Exception {
-		dao.select(k);
-		
-		return null;
+		Cust cust = null;
+		try{
+			cust = dao.select(k);
+		}catch(Exception e) {
+			if(e instanceof SQLRecoverableException) {
+				throw new Exception("시스템 장애 입니다.");
+			}else {
+				throw new Exception("ID가 존재 하지 않습니다.");
+			}
+		}
+		return cust;
 	}
 
 	@Override
 	public List<Cust> get() throws Exception {
-		dao.selectAll();
-		return null;
+		List<Cust> list = null;
+		try {
+			list = dao.selectAll();
+		}catch (Exception e) {
+			if(e instanceof SQLRecoverableException) {
+				throw new Exception("시스템 장애 입니다.");
+			}
+		}
+		return list;
 	}
 
 }

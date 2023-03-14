@@ -30,7 +30,7 @@ public class selectTest {
 
 			try(Connection con = DriverManager.getConnection(url, id, pwd);
 					PreparedStatement pstmt = con.prepareStatement(selectSql);) {
-				pstmt.setString(1, "id04");
+				pstmt.setString(1, "id04");//조회하고자 하는 키 값
 				try(ResultSet rset = pstmt.executeQuery()){
 					rset.next();
 					String db_id = rset.getString("id");
