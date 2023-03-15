@@ -17,3 +17,16 @@
     2. second
 2. second
 3. third
+
+*single asterisks*
+_single underline_
+**double asterisks*
+__double underscores__
+
+<pre>
+<code>
+  
+ </code>
+ </pre>
+ 
+ [Google에 접속] (http://google.com, "google link")
