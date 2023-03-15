@@ -23,7 +23,7 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 			e.printStackTrace();
 			return;
 		}
-		System.out.println("Driver Loading 완료");
+		//System.out.println("Driver Loading 완료");
 	}
 
 	@Override
@@ -59,13 +59,9 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 	public void update(Cart v) throws Exception {
 		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.CartUpdateSql);) {
 
-			// pstmt.setInt(1, v.getCnt());
-			// pstmt.setString(2, v.getId());
 
-			pstmt.setString(1, v.getUser_id());
-			pstmt.setString(2, v.getItem_id());
-			pstmt.setInt(3, v.getCnt());
-			pstmt.setString(4, v.getId());////// ??????왜뒤에???
+			pstmt.setString(2, v.getId());
+			pstmt.setInt(1, v.getCnt());
 			int result = pstmt.executeUpdate();
 			if (result == 0) {
 				throw new Exception("존재하지 않는 ID입니다.");
@@ -121,15 +117,37 @@ public class CartDaoImpl implements DAO<String, String, Cart> {
 			}
 		} catch (Exception e) {
 			throw e;
-
 		}
 		return list;
 	}
 
 	@Override
-	public List<Cart> search(String k) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	} 
+	public List<Cart> search(String k) throws Exception {	//id를 넣으면 걔가 보유한 cart list를 보여줘라
+		List<Cart> list = new ArrayList<Cart>();
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(Sql.MycartSelectAllSql);) {
+			
+			pstmt.setString(1,k);	//String k에 user_id 넣게따는 조건으로
+			try (ResultSet rSet = pstmt.executeQuery();) {	//데이터를 조회해라
+				
+				while (rSet.next()) {
+					Cart cart = null;
+					String id = rSet.getString("id");
+					String user_id = rSet.getString("user_id");
+					String item_id = rSet.getString("item_id");
+					int cnt = rSet.getInt("cnt");
+					Date regdate = rSet.getDate("regdate");
 
-}
+					cart = new Cart(id, user_id, item_id, cnt, regdate);
+					list.add(cart);
+				}
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return list;
+	}
+
+} 
+

@@ -11,7 +11,7 @@ public class CartSelectTest {
 		Cart cart = null;
 		 
 		try {
-			cart = cartService.get("2023314379100");
+			cart = cartService.get("2023315535100");
 			System.out.println(cart);
 			
 		} catch (Exception e) {

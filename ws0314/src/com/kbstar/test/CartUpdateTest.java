@@ -8,7 +8,7 @@ public class CartUpdateTest {
 	public static void main(String[] args) {
 		CRUDService<String, Cart> Service = new CartCRUDServiceImpl();
 		Cart cart = null;
-		cart = new Cart("2023314644100","김낑까깡","BAG", 30, null);
+		cart = new Cart("2023315521100",100);
 		
 		try{
 			Service.modify(cart);

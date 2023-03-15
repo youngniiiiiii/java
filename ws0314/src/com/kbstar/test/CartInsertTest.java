@@ -10,7 +10,7 @@ public class CartInsertTest {
 	public static void main(String[] args) {
 		CRUDService<String, Cart> Service = new CartCRUDServiceImpl();
 		
-		Cart cart = new Cart("id777","2243455",3);
+		Cart cart = new Cart("id10000","bag01",3);
 		try{
 			Service.register(cart);
 			System.out.println("장바구니 담기 성공");

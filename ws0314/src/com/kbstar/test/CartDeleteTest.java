@@ -10,7 +10,7 @@ public class CartDeleteTest {
 		CRUDService<String, Cart> Service = new CartCRUDServiceImpl();
 		
 		try{
-			Service.remove("2023314632100");
+			Service.remove("2023315521100");
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
