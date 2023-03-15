@@ -1,6 +1,19 @@
 # java
+## java
+### java
 
-1. basic
-2. oop
-3. advance
-4. assignment
+***
+
+
+- ## 기술 스택
+  - ### Back-end
+    - 자바 11
+    - 오라클 버전
+    - 기술 스택을 넣어주세요
+    - GIT
+
+1. first
+    1. first
+    2. second
+2. second
+3. third
